@@ -1,0 +1,51 @@
+# **14 Model-Videw-Controller (MVC): Tech Blog
+
+## **Project Description**
+    
+
+---
+## **URLs**
+- [Deployed Application]()
+- [GitHub Repository URL](https://github.com/jouriena11/ecommerce-backend)
+
+---
+## **Table of Contents**
+- <a href="#installation">Installation</a>
+- <a href="#technologies-used">Technologies Used</a>
+- <a href="#usage">Usage</a>
+- <a href="#future-development">Future Developments</a>
+
+---
+## **Installation**
+The following npm packages must be installed to run this application:
+- bcrypt v5.0.0
+- dotenv v8.2.0
+- Express v4.17.1
+- mysql2 v2.2.5
+- sequelize v6.3.5
+- connect-session-sequelize v7.0.4
+- handlebars v4.7.7
+- express-handlebars v5.2.0
+- express-session v1.17.1
+
+The installations can be done conveniently by the running the following command line at the root directory: 
+```
+npm i
+```
+
+---
+## **Technologies Used**
+- JavaScript
+- Node.js
+- MySQL
+- Express.js
+- Handlebars
+
+---
+## **Usage**
+Before running this application, make sure to do the following first
+- change `.env.EXAMPLE` file name to `.env` 
+- update your username and password in the .env file
+
+---
+## **Future Development**
