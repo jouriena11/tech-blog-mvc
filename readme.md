@@ -17,7 +17,7 @@
 
 ---
 ## **Installation**
-The following npm packages must be installed to run this application:
+The following npm libraries must be installed to run this application:
 - bcrypt v5.0.0
 - dotenv v8.2.0
 - Express v4.17.1
@@ -35,11 +35,14 @@ npm i
 
 ---
 ## **Technologies Used**
+- HTML
+- Bootstrap / CSS
 - JavaScript
 - Node.js
 - MySQL
 - Express.js
 - Handlebars
+- axios
 
 ---
 ## **Usage**
@@ -49,3 +52,5 @@ Before running this application, make sure to do the following first
 
 ---
 ## **Future Development**
+- to include more properties to the `User` Model, such as first name, last name, and email address
+- allow users 
