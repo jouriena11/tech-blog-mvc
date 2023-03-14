@@ -17,35 +17,33 @@
     <!-- TODO: main.handlebars -->
     <header>
         <nav class="navbar navbar-expand-lg bg-warning">
-            <div class="container-fluid">
-                <div class="row d-flex justify-content-between align-items-center">    
-                    <div id="tech-blog-title" class="bg-white rounded-3 py-2 my-2 px-3 ms-3 col-md-6">
-                        <h1>The Tech Blog</h1>
-                    </div>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse d-none d-md-inline col-md-4" id="navbarSupportedContent">
-                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <!-- TODO: API route to homepage.handlebars -->
-                                <a class="nav-link active" aria-current="page" href="/homepage">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Dashboard</a>
-                            </li>
-                            <!-- TODO: hide "Login" menu with logged in -->
-                            <li id="navbar-login-menu" class="nav-item">
-                                <a class="nav-link" href="#">Login</a>
-                            </li>
-                            <li class="nav-item">
-                                <!-- TODO: hide "Logout" menu with logged out -->
-                                <a id="navbar-logout-menu" class="nav-link" href="#">Logout</a>
-                            </li>
-                        </ul>
-                    </div>
+            <div class="container-fluid">    
+                <div id="tech-blog-title" class="bg-white rounded-3 py-2 my-2 px-3 ms-3">
+                    <h1>The Tech Blog</h1>
+                </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse d-none d-md-inline" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <!-- TODO: API route to homepage.handlebars -->
+                            <a class="nav-link active" aria-current="page" href="/homepage">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Dashboard</a>
+                        </li>
+                        <!-- TODO: hide "Login" menu with logged in -->
+                        <li id="navbar-login-menu" class="nav-item">
+                            <a class="nav-link" href="#">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <!-- TODO: hide "Logout" menu with logged out -->
+                            <a id="navbar-logout-menu" class="nav-link" href="#">Logout</a>
+                        </li>
+                    </ul>
                 </div>
             </div>            
         </nav>
@@ -53,10 +51,10 @@
 
     <div class="container-fluid my-5">
         <!-- TODO: handlebars -->
-        <!-- {{{ body }}} -->
-        <!-- TODO: Rendering login form -->
-        <!-- TODO: Rendering logout form -->
-        <!-- TODO: Rendering existing blog posts -->
+        {{{ body }}}
+        <!-- TODO: Rendering Login page - login form -->
+        <!-- TODO: Rendering Signup page - Signup form -->
+        <!-- TODO: Rendering Homepage - existing blog posts -->
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
@@ -65,3 +63,4 @@
 </body>
 
 </html>
+<script src="./js/main.js"></script>

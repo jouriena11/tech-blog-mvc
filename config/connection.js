@@ -1,6 +1,4 @@
 const Sequelize = require('sequelize');
-// const session = require('express-session');
-// const SequelizeStore = require('connect-session-sequelize')(session.Store);
 require('dotenv').config();
 
 const sequelize = new Sequelize(
@@ -13,11 +11,5 @@ const sequelize = new Sequelize(
     port: 3306,
   }
 );
-
-// const sessionStore = new SequelizeStore({
-//   db: sequelize,
-//   table: 'Session',
-//   secret: process.env.SESSION_SECRET,
-// });
 
 module.exports = sequelize;

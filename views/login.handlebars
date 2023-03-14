@@ -5,13 +5,15 @@
         </div>
         <div class="mb-3 mx-1">
             <label for="login-username-input" class="form-label">Username</label>
-            <input type="email" class="form-control" id="login-username-input" aria-describedby="emailHelp">
+            <input type="text" class="form-control" id="login-username-input" aria-describedby="emailHelp">
         </div>
         <div class="mb-3 mx-1">
             <label for="login-password-input" class="form-label">Password</label>
             <input type="password" class="form-control" id="login-password-input">
         </div>
-        <button type="submit" class="btn btn-primary mx-1">Submit</button>
-        <div id="emailHelp" class="form-text mx-1">Sign up instead</div>
+        <button id="login-btn" type="submit" class="btn btn-primary mx-1">Submit</button>
+        <a id="signup-redirect-link" href="/signup" class="form-text mx-1">Sign up instead</a>
     </form>
 </div>
+
+<script src="./js/login.js"></script>

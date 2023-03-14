@@ -6,7 +6,7 @@
 ---
 ## **URLs**
 - [Deployed Application]()
-- [GitHub Repository URL](https://github.com/jouriena11/ecommerce-backend)
+- [GitHub Repository URL](https://github.com/jouriena11/tech-blog-mvc)
 
 ---
 ## **Table of Contents**
@@ -48,9 +48,8 @@ npm i
 ## **Usage**
 Before running this application, make sure to do the following first
 - change `.env.EXAMPLE` file name to `.env` 
-- update your username and password in the .env file
+- update your DB_USERNAME, DB_PASSWORD, and SESSION_SECRET in the .env file
 
 ---
 ## **Future Development**
-- to include more properties to the `User` Model, such as first name, last name, and email address
-- allow users 
+- forgot password
