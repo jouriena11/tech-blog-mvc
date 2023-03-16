@@ -123,9 +123,7 @@ router.get('/blog/:blogId', withAuth, async (req, res) => {
     try {
       const blogId = req.params.blogId;
       const { data: blogData } = await axios.get(`http://localhost:${PORT}/api/blog/${blogId}`);
-      res.render('blog-render', { 
-        user_blog: blogData, 
-        username: blogData.user.username });
+      res.json(blogData);
     } catch (err) {
       res.status(500).json(err);
     }

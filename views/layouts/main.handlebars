@@ -31,7 +31,7 @@
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="/">Home</a>
                             </li>
-                            {{#if userData.logged_in}}
+                            {{!-- {{#if loginStatus}} --}}
                             <li class="nav-item">
                                 <a class="nav-link" href="/dashboard">Dashboard</a>
                             </li>
@@ -41,11 +41,11 @@
                             <li id="navbar-logout-menu" class="nav-item">
                                 <a id="navbar-logout-menu" class="nav-link" href="#">Logout</a>
                             </li>
-                            {{else}}
+                            {{!-- {{else}} --}}
                             <li id="navbar-login-menu" class="nav-item">
                                 <a class="nav-link" href="/login">Login</a>
                             </li>
-                            {{/if}}
+                            {{!-- {{/if}} --}}
 
                         </ul>
                     </div>
@@ -71,11 +71,11 @@
 <!-- Render script for logged in users only -->
 
 <script>
-    const loginStatus = {{userData.logged_in}};
+    const loginStatus = {{user.logged_in}};
 </script>
 <script src="/js/dashboard.js"></script>
 </body>
-{{!-- {{#if logged_in}} --}}
+{{!-- {{#if loginStatus}} --}}
 <script src="/js/logout.js"></script>
 {{!-- {{/if}} --}}
 </html>
