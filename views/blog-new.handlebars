@@ -1,0 +1,22 @@
+{{!-- create a new blog --}}
+    <div id="new-blog-form" class="row py-3" data-user-id="{{userId}}">
+        <form class="offset-1 col-10 offset-lg-3 col-lg-6">
+            <div class="bg-black px-3 py-2 rounded-1 mb-3">
+                <h2 class="text-white">Create a New Blog</h2>
+            </div>
+            <div class="mb-3 mx-1 py-1">
+                <label for="blog-title-field" class="form-label"><strong>Blog Title</strong></label>
+                <input id="blog-title-field" type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter your blog title here.">
+            </div>
+            <div class="mb-3 mx-1">
+                <label for="blog-content-field" class="form-label"><strong>Content</strong></label>
+                <textarea id="blog-content-field" class="form-control" rows="5" placeholder="Enter your blog content here."></textarea>
+            </div>
+            <button id="publish-blog-btn" type="submit" class="btn btn-primary mx-1 my-1">Publish</button>
+        </form>
+    </div>
+    <script>
+        const seesionUserId = {{userId}};
+    </script>
+    <script src="./js/blog-new.js"></script>
+    

@@ -1,8 +1,11 @@
 const router = require('express').Router();
+const axios = require('axios');
+const dayjs = require('dayjs');
 const { User, Blog } = require('../models');
 const withAuth = require('../utils/auth');
+const { limitCharacters } = require('../utils/helpers');
 
-// GET request - get all blogs
+// GET request - get all blogs on homepage regardless of the login status
 router.get('/', async (req, res) => {
     try {
         const allBlogs = await Blog.findAll({
@@ -15,64 +18,117 @@ router.get('/', async (req, res) => {
             required: true
         });
 
-        // console.log(allBlogs[0])
-
         const mappedBlogs = allBlogs.map((blog) => ({
             id: blog.id,
             title: blog.title,
+            content: blog.content,
             created_date: blog.createdAt,
             updated_date: blog.updatedAt,
             username: blog.user.username
-        }))
+        }));
 
-        // console.log('mappedBlogs => ', mappedBlogs)
+        mappedBlogs.forEach((blog) => {
+            blog.content = limitCharacters(blog.content, 300);
+            blog.created_date = dayjs(blog.created_date).format('DD-MM-YYYY HH:mm:ss')
+        });
 
-        // res.status(200).json(mappedBlogs)
+        res.render('homepage', { 
+            blogs: mappedBlogs,
+            logged_in: req.session.logged_in
+        })
 
     } catch(err) {
         console.error(err)
         res.status(500).json(err);
     }
-})
+});
 
-// login
+// redirect to dashboad page when logged in
+// redirect to login page if logged out
 router.get('/login', (req, res) => {
     if(req.session.logged_in) {
-        res.redirect('/profile');
+        res.redirect('/dashboard');
         return;
     }
     res.render('login');
-})
+});
 
-// logout
-router.get('/logout', (req, res) => {
-    if(req.session.logged_in) {
-        res.redirect('/homepage');
-        return;
-    }
-
-    res.render('homepage');
-})
-
-// signup
+// redirect to homepage page when logged in
+// redirect to signup page when logged out
 router.get('/signup', (req, res) => {
     if(req.session.logged_in) {
-        res.redirect('/homepage');
+        res.redirect('/dashboard');
         return;
     }
     res.render('signup');
-})
+});
 
-// profile
-router.get('/profile', async (req, res) => {
-    if(req.session.logged_in) {
+
+router.get('/dashboard', withAuth, async (req, res) => {
+    const userData = {
+        userId: req.session.user_id,
+        logged_in: req.session.logged_in
+    }
+    // console.log(userData);
+    const userBlogs = await Blog.findAll({
+        where: {
+          user_id: userData.userId,
+        },
+        include: [
+          {
+            model: User,
+            attributes: ['id', 'username']
+          }
+        ],
+        required: true,
+        raw: true
+    });
+
+    userBlogs.forEach((blog) => {
+        blog.content = limitCharacters(blog.content, 300),
+        blog.createdAt = dayjs(blog.createdAt).format('DD/MM/YYYY HH:mm:ss'),
+        blog.updatedAt = dayjs(blog.updatedAt).format('DD/MM/YYYY HH:mm:ss')
+    })
+    
+    // console.log('userBlogs => ', userBlogs);
+    res.render('dashboard', {userData: userData, userBlogs: userBlogs});
+});
+
+// redirect to profile page when logged in
+// redirect to login page when logged out
+// TODO: needs withAuth?
+router.get('/profile', withAuth, async (req, res) => {
         const profile = await User.findByPk(req.session.user_id);
         
-        res.render('/profile',profile);
+        console.log('profile => ', profile)
+
+        res.render('profile');
 
         return;
-    };
-    res.redirect('/login');
-})
+    }
+);
+
+router.get('/create-new-blog', withAuth, async(req, res) => {
+    res.render('blog-new', {userId: req.session.user_id})
+});
+
+// when logged in as a creator and clicking on a particular blog from the dashboard, redirect to update-or-delete form
+// TODO: if no change, then don't save?
+// TODO: when press delete, confirm()
+router.get('/blog-update-delete', withAuth, async(req, res) => {
+    res.render('blog-update-delete')
+});
+
+router.get('/blog/:blogId', withAuth, async (req, res) => {
+    try {
+      const blogId = req.params.blogId;
+      const { data: blogData } = await axios.get(`http://localhost:${PORT}/api/blog/${blogId}`);
+      res.render('blog-render', { 
+        user_blog: blogData, 
+        username: blogData.user.username });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  });
 
 module.exports = router;

@@ -27,6 +27,7 @@ The following npm libraries must be installed to run this application:
 - handlebars v4.7.7
 - express-handlebars v5.2.0
 - express-session v1.17.1
+- dayjs
 
 The installations can be done conveniently by the running the following command line at the root directory: 
 ```
@@ -52,4 +53,8 @@ Before running this application, make sure to do the following first
 
 ---
 ## **Future Development**
-- forgot password
+- to include forgot password functionality
+- to include last_update on blog rendering on homepage
+- when clicking on a username on homepage, the user would be redirected to another view that displays only blogs created by that particular user
+- to add text-decoration functionality to blog content creation
+- comment upvote to determine sort order

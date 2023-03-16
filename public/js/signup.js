@@ -5,9 +5,10 @@ const signupSubmitBtn = document.getElementById('signup-submit-btn');
 async function signup(event) {
     event.preventDefault();
     const username = usernameEl.value.trim();
-    const password = passwordEl.value.trim();
+    const password = passwordEl.value;
 
     if(!username || !password) {
+        // TODO: to change alert to modal
         alert('Please enter your username and password.')
     } else {
         usernameEl.value = '';
@@ -23,7 +24,7 @@ async function signup(event) {
 
             if(response.status === 201) {
                 alert('Your account has been created');
-                window.location.href = '/login';
+                window.location.href = '/dashboard';
             };
 
         } catch(err) {

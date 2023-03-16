@@ -1,0 +1,15 @@
+{{!-- update/delete a blog --}}
+<div id="new-blog-form" class="row py-3" data-blog-id="blogId">
+        <form class="offset-1 col-10 offset-lg-3 col-lg-6">
+            <div class="mb-3 mx-1 py-1">
+                <label for="blog-title-field" class="form-label"><strong>Blog Title</strong></label>
+                <textarea id="blog-title-field" type="text" class="form-control" aria-describedby="emailHelp" rows="1">Title</textarea>
+            </div>
+            <div class="mb-3 mx-1">
+                <label for="blog-content-field" class="form-label"><strong>Content</strong></label>
+                <textarea id="blog-content-field" class="form-control" rows="10">Content</textarea>
+            </div>
+            <button id="update-blog-btn" type="submit" class="btn btn-warning mx-1 my-1">Update</button>
+            <button id="delete-blog-btn" type="submit" class="btn btn-danger mx-1 my-1">Delete</button>
+        </form>
+</div>

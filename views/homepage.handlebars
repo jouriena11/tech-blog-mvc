@@ -1,0 +1,17 @@
+<div id="blogs-canvas-on-homepage" class="row mx-5">
+    {{#each blogs}}
+        <div class="col-12 my-3" data-blog-id="{{id}}">
+            <div class="card">
+                <div class="bg-dark text-white d-flex justify-content-between align-items-center">
+                    <h5 class="card-header">{{title}}</h5>
+                    <h6 class="my-0 me-4 font-weight-normal">Posted by: {{ username }} on {{ created_date }} </h6>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{content}}</p>
+                    <!-- TODO: redirect to that particular blog page; to pass blogId via dataset -->
+                    <a class="text-decoration-none text-secondary" href="#">Read more...</a>
+                </div>
+            </div>
+        </div>
+    {{/each}}
+</div>

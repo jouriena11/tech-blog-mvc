@@ -1,24 +1,39 @@
 const router = require("express").Router();
-const { Blog } = require("../../models");
-const { update } = require("../../models/User");
+const { User, Blog } = require("../../models");
+const dayjs = require('dayjs');
 
-// GET request - get all blogs that belong to a user_id
-// api/blog/
+// GET request - get blog data by blog id
+// api/blog/:id
 router.get("/:id", async (req, res) => {
   try {
-    const userBlogs = await Blog.findAll({
-      where: {
-        user_id: req.params.id,
-      },
+    const userBlog = await Blog.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: ['id', 'username']
+        }
+      ],
+      required: true, 
+      raw: true
     });
 
-    if (!userBlogs) {
+    if (!userBlog) {
       res.status(404).json({
         message: "No blog found.",
       });
       return;
     }
-    res.status(200).json(userBlogs);
+
+    userBlog.createdAt = dayjs(userBlog.created_date).format('DD-MM-YYYY HH:mm:ss');
+    userBlog.updatedAt = dayjs(userBlog.updated_date).format('DD-MM-YYYY HH:mm:ss');
+
+    console.log('userBlog => ', userBlog)
+
+    res.render('blog-render', { 
+      user_blog: userBlog,
+      username: userBlog.user.username
+    });
+    
   } catch (err) {
     res.status(500).json(err);
   }
@@ -28,14 +43,9 @@ router.get("/:id", async (req, res) => {
 // api/blog/create-new
 router.post("/create-new", async (req, res) => {
   try {
-    // console.log('newBlog =>', newBlog);
     const newBlog = await Blog.create(req.body);
-    res.status(200).json(newBlog);
-    // res.status(200).json({
-    //     message: 'Your new blog has been created.'
-    // });
-
-    // TODO: to display a modal?
+    console.log('newBlog =>', newBlog);
+    res.status(201).json(newBlog);
     
   } catch (err) {
     console.error(err);

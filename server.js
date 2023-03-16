@@ -15,7 +15,12 @@ const hbs = exphbs.create({ helpers });
 
 const sess = {
   secret: process.env.SESSION_SECRET,
-  cookie: {},
+  cookie: {
+    maxAge: 300000*5, // 15 min
+    httpOnly: true, // cookie can only be accessed by the server and is not accessible by client-side scripts running in the browser. This helps to prevent cross-site scripting (XSS) attacks.
+    secure: false, // cookie can also be sent over http connection (i.e. not limited to just https)
+    sameSite: 'strict', // 'strict' means cookie will only be sent to the server for requests that originate from the same site as the server
+  },
   resave: false, // don't save session if unmodified
   saveUninitialized: true, // don't create session until something is stored
   store: new SequelizeStore({

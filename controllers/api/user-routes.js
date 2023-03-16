@@ -11,7 +11,7 @@ router.post('/login', async (req, res) => {
         });
 
         if(!userData) {
-            res.json(404).json({
+            res.status(400).json({
                 message: 'Username not found. Please try again.'
             });
             return;
@@ -31,54 +31,106 @@ router.post('/login', async (req, res) => {
             req.session.username = userData.username;
             req.session.logged_in = true;
 
-            res.json({
-                user: {
-                    id: userData.id,
-                    username: userData.username,
-                },
-                message: "You're now logged in."
-            })
-        })
+            const user = {
+                id: userData.id,
+                username: userData.username,
+                first_name: userData.first_name,
+                last_name: userData.last_name,
+                email: userData.email,
+                logged_in: req.session.logged_in
+            }
+
+            // console.log('userLog', user)
+
+            res.status(200)
+                .json({
+                    user: user,
+                    message: "You're now logged in."
+                })
+        });
 
     } catch(err) {
-        res.status(500).json({
+        res.status(400).json({
             message: 'Error logging in',
         });
     }
 })
 
-// router.post('/logout', async (req, res) => {
-//     try {
-//         // TODO
-//     } catch(err) {
-//         res.status(500).json({
-//             message: 'Error logging out',
-//         });
-//     }
-// })
+router.post('/logout', (req, res) => {
+  if (req.session.logged_in) {
+    req.session.destroy(() => {
+      res.clearCookie('connect.sid'); // clear session cookie
+      res.status(204).end(); // send empty response with 204 status
+    });
+  } else {
+    res.status(404).end();
+  }
+});
 
-router.post('/signup', async (req, res) => {
+  router.post('/signup', async (req, res) => {
     const saltRounds = 10;
     try {
-        const salt = bcrypt.genSaltSync(saltRounds);
-        const hash = bcrypt.hashSync(req.body.password, salt);
+      const salt = bcrypt.genSaltSync(saltRounds);
+      const hash = bcrypt.hashSync(req.body.password, salt);
+  
+      req.body.password = hash;
+  
+      const newUser = await User.create(req.body);
+  
+      const user = {
+        id: newUser.id,
+        username: newUser.username,
+        first_name: newUser.first_name,
+        last_name: newUser.last_name,
+        email: newUser.email,
+        logged_in: true
+      };
 
-        req.body.password = hash;
-
-        console.log('\n\n Signup in progress \n\n');
-
-        console.log('req.body => ', req.body);
-
-        const newUser = await User.create(req.body);
-
-        res.status(201).json(newUser);
-
-    } catch (err) {
-        console.error(err)
-        res.status(500).json({
-            message: 'Error creating a new user',
+      // console.log('userLog', user)
+  
+      req.session.save(() => {
+        req.session.user_id = newUser.id;
+        req.session.username = newUser.username;
+        req.session.logged_in = true;
+  
+        res.status(201).json({
+          user: user,
+          message: "You're now logged in."
         });
+      });
+  
+    } catch (err) {
+      console.error(err)
+      res.status(500).json({
+        message: 'Error creating a new user',
+      });
     }
-})
+  });
+
+  // DELETE request - request user by user id
+  router.delete('/delete/:id', async (req, res) => {
+    try {
+        const delUser = await User.destroy({
+            where: {
+                id: req.params.id,
+            }
+        })
+
+        if(!delUser) {
+            res.status(404).json({
+                message: 'User not found'
+            });
+            return;
+        }
+
+        res.status(200).json({
+            message: 'The user has been deleted',
+            rows_deleted: delUser
+        })
+    } catch(err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+  })
 
 module.exports = router

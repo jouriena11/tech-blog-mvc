@@ -1,0 +1,43 @@
+{{!-- GET blog by blog_id including comments --}}
+{{!-- if logged out, no comment box --}}
+{{!-- if logged in as audience, there's comment box --}}
+{{!-- update button, delete button --}}
+
+    <div id="individual-blog-render" class="row mx-3">
+        <div class="col-12 my-3">
+            <div class="card">
+                <div class="bg-dark text-white rounded-top d-flex justify-content-between align-items-center py-3">
+                    <h5 class="card-header">{{{user_blog.title}}}</h5>
+                    <h6 class="my-0 me-4 font-weight-normal">Posted by: {{username}} on {{user_blog.createdAt}}</h6>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{{user_blog.content}}}</p>
+                </div>
+            </div>
+            {{!-- <div id="render-blog-comments" class="card my-3">
+                <div class="bg-secondary text-white rounded-top d-flex justify-content-between align-items-center ">
+                    <h6 class="card-header">Comments</h6>
+                </div> --}}
+                <!-- stacks of comments to be displayed here -->
+                <!-- {{#each }} -->
+                    {{!-- <div class="card-body">
+                            <p class="card-text">"Comment.content" -- username, created_date</p>
+                    </div>
+                    <div class="card-body">
+                            <p class="card-text">"Comment.content" -- username, created_date</p>
+                    </div> --}}
+                <!-- {{/each}} -->
+            {{!-- </div>
+            <div id="blog-comment-form" class="row py-3">
+                <form class="">
+                    <div class="bg-info px-3 py-2 rounded-0 rounded-top">
+                        <h6 class="text-black">Add a comment</h6>
+                    </div>
+                    <div class="mb-3 ">
+                        <textarea id="blog-content-field" class="form-control rounded-0 rounded-bottom" rows="5" placeholder="Enter your comment here."></textarea>
+                    </div>
+                    <button id="publish-blog-btn" type="submit" class="btn btn-primary mx-1 my-1">Publish</button>
+                </form>
+            </div> --}}
+        </div>
+    </div>

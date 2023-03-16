@@ -1,0 +1,26 @@
+<link rel="stylesheet" href="css/style.css">
+<div class="row mx-5">
+    <div class="col-12 col-md-6 d-flex justify-content-start">
+        <h1>Dashboard</h1>
+    </div>
+    <div class="col-12 col-md-6 d-flex justify-content-end">
+        <a href="/create-new-blog"><button id="new-blog-button" class="text-white border-0 px-3 py-2 new-blog-btn" >+ New Post</button></a>
+    </div>
+</div>
+<div id="blogs-canvas-on-dashboard" class="row mx-5">
+    {{#each userBlogs}}
+        <div class="col-12 my-3">
+            <div class="card">
+                <div class="bg-dark text-white d-flex justify-content-between align-items-center">
+                    <h5 class="card-header">{{title}}</h5>
+                    <h6 class="my-0 me-4 font-weight-normal">Posted on {{ createdAt }} </h6>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{content}}</p>
+                    <!-- TODO: redirect to that particular blog page; to pass blogId via dataset -->
+                    <a class="user-blog text-decoration-none text-secondary" data-blog-id="{{id}}" href="#">Read more...</a>
+                </div>
+            </div>
+        </div>
+    {{/each}}
+</div>

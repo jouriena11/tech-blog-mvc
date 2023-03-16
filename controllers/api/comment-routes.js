@@ -32,7 +32,7 @@ router.get("/:id", async (req, res) => {
 router.post("/create-new", async (req, res) => {
   try {
     const newComment = await Comment.create(req.body);
-    res.status(200).json({
+    res.status(201).json({
       message: "Your comment has been posted.",
     });
   } catch (err) {
