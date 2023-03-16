@@ -132,11 +132,15 @@ router.get('/blog-update-delete', withAuth, async(req, res) => {
 
 router.get('/blog/:blogId', withAuth, async (req, res) => {
     try {
-      const blogId = req.params.blogId;
-      const { data: blogData } = await axios.get(`http://localhost:${PORT}/api/blog/${blogId}`);
-      res.json(blogData);
+        const PORT = process.env.PORT || 3001;
+        const blogId = req.params.blogId;
+        const { data: blogData } = await axios.get(`http://localhost:${PORT}/api/blog/${blogId}`);
+        console.log('frontend blogData => ', blogData)
+        res.render('blog-render', blogData);
+
     } catch (err) {
-      res.status(500).json(err);
+        console.error(err);
+        res.status(500).json(err);
     }
 });
 

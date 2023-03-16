@@ -59,6 +59,9 @@ Logout
 
 ---
 ## **Future Development**
+- To fix bug: to render individual blog
+- To make it possible for logged-in users to update or delete a blog of their own creations
+- To make it possible for logged-in users to add comment to a blog
 - to include forgot password functionality
 - to include last_update on blog rendering on homepage
 - when clicking on a username on homepage, the user would be redirected to another view that displays only blogs created by that particular user

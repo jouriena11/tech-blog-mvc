@@ -27,12 +27,14 @@ router.get("/:id", async (req, res) => {
     userBlog.createdAt = dayjs(userBlog.created_date).format('DD-MM-YYYY HH:mm:ss');
     userBlog.updatedAt = dayjs(userBlog.updated_date).format('DD-MM-YYYY HH:mm:ss');
 
-    console.log('userBlog => ', userBlog)
+    console.log('backend userBlog => ', userBlog)
 
-    res.render('blog-render', { 
+    res.json({ 
       user_blog: userBlog,
       username: userBlog.user.username
     });
+
+    console.log('checkpoint')
     
   } catch (err) {
     res.status(500).json(err);
