@@ -5,7 +5,7 @@
 
 ---
 ## **URLs**
-- [Deployed Application]()
+- [Deployed Application](https://tech-blog-999.herokuapp.com/)
 - [GitHub Repository URL](https://github.com/jouriena11/tech-blog-mvc)
 
 ---

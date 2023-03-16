@@ -8,13 +8,16 @@ const routes = require('./controllers');
 const helpers = require('./utils/helpers');
 require('dotenv').config();
 
+console.log('session', process.env.SESSION_SECRET);
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 const hbs = exphbs.create({ helpers });
 
 const sess = {
-  secret: process.env.SESSION_SECRET,
+  // secret: process.env.SESSION_SECRET,
+  secret: "sCrTv267",
   cookie: {
     maxAge: 300000*5, // 15 min
     httpOnly: true, // cookie can only be accessed by the server and is not accessible by client-side scripts running in the browser. This helps to prevent cross-site scripting (XSS) attacks.
