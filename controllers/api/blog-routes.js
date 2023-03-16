@@ -16,7 +16,7 @@ router.get("/:id", async (req, res) => {
       required: true, 
       raw: true
     });
-
+    
     if (!userBlog) {
       res.status(404).json({
         message: "No blog found.",
@@ -45,7 +45,7 @@ router.post("/create-new", async (req, res) => {
   try {
     const newBlog = await Blog.create(req.body);
     console.log('newBlog =>', newBlog);
-    res.status(201).json(newBlog);
+    res.redirect('/dashboard') // TODO: the redirect is still isn't working
     
   } catch (err) {
     console.error(err);

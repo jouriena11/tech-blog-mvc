@@ -1,7 +1,7 @@
 # **14 Model-Videw-Controller (MVC): Tech Blog
 
 ## **Project Description**
-    
+The Tech Blog is a CMS website designed for blogging. By signing up and logging in, users can view, publish, edit, and delete blog posts of their own creation as well as comment on other bloggers' posts.
 
 ---
 ## **URLs**
@@ -18,16 +18,17 @@
 ---
 ## **Installation**
 The following npm libraries must be installed to run this application:
-- bcrypt v5.0.0
-- dotenv v8.2.0
-- Express v4.17.1
-- mysql2 v2.2.5
-- sequelize v6.3.5
-- connect-session-sequelize v7.0.4
+- axios v1.3.4
+- bcrypt v5.1.0
+- connect-session-sequelize v7.1.5
+- dayjs v1.11.7
+- dotenv v16.0.3
+- Express v4.18.2
+- express-handlebars v6.0.7
+- express-session v1.17.3
 - handlebars v4.7.7
-- express-handlebars v5.2.0
-- express-session v1.17.1
-- dayjs
+- mysql2 v3.1.2
+- sequelize v6.29.0
 
 The installations can be done conveniently by the running the following command line at the root directory: 
 ```
@@ -40,16 +41,21 @@ npm i
 - Bootstrap / CSS
 - JavaScript
 - Node.js
-- MySQL
 - Express.js
+- MySQL
 - Handlebars
-- axios
+- Axios
+- Day.js
 
 ---
 ## **Usage**
-Before running this application, make sure to do the following first
-- change `.env.EXAMPLE` file name to `.env` 
-- update your DB_USERNAME, DB_PASSWORD, and SESSION_SECRET in the .env file
+Click on the deployed application link in URL section above, and you'll be taken to the deployed application page.
+
+Sign up
+Log in
+Create a blog
+Comment
+Logout
 
 ---
 ## **Future Development**

@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const router = require('express').Router();
 const { User } = require('../../models');
 
+// POST request - login
 router.post('/login', async (req, res) => {
     try {
         const userData = await User.findOne({
@@ -56,6 +57,7 @@ router.post('/login', async (req, res) => {
     }
 })
 
+// POST request - logout
 router.post('/logout', (req, res) => {
   if (req.session.logged_in) {
     req.session.destroy(() => {
@@ -67,70 +69,72 @@ router.post('/logout', (req, res) => {
   }
 });
 
-  router.post('/signup', async (req, res) => {
-    const saltRounds = 10;
-    try {
-      const salt = bcrypt.genSaltSync(saltRounds);
-      const hash = bcrypt.hashSync(req.body.password, salt);
-  
-      req.body.password = hash;
-  
-      const newUser = await User.create(req.body);
-  
-      const user = {
-        id: newUser.id,
-        username: newUser.username,
-        first_name: newUser.first_name,
-        last_name: newUser.last_name,
-        email: newUser.email,
-        logged_in: true
-      };
+// POST request - signup
+router.post('/signup', async (req, res) => {
+  const saltRounds = 10;
+  try {
+    const salt = bcrypt.genSaltSync(saltRounds);
+    const hash = bcrypt.hashSync(req.body.password, salt);
 
-      // console.log('userLog', user)
-  
-      req.session.save(() => {
-        req.session.user_id = newUser.id;
-        req.session.username = newUser.username;
-        req.session.logged_in = true;
-  
-        res.status(201).json({
-          user: user,
-          message: "You're now logged in."
-        });
+    req.body.password = hash;
+
+    const newUser = await User.create(req.body);
+
+    const user = {
+      id: newUser.id,
+      username: newUser.username,
+      first_name: newUser.first_name,
+      last_name: newUser.last_name,
+      email: newUser.email,
+      logged_in: true
+    };
+
+    // console.log('userLog', user)
+
+    req.session.save(() => {
+      req.session.user_id = newUser.id;
+      req.session.username = newUser.username;
+      req.session.logged_in = true;
+
+      res.status(201).json({
+        user: user,
+        message: "You're now logged in."
       });
-  
-    } catch (err) {
-      console.error(err)
-      res.status(500).json({
-        message: 'Error creating a new user',
-      });
-    }
-  });
+    });
 
-  // DELETE request - request user by user id
-  router.delete('/delete/:id', async (req, res) => {
-    try {
-        const delUser = await User.destroy({
-            where: {
-                id: req.params.id,
-            }
-        })
+  } catch (err) {
+    console.error(err)
+    res.status(500).json({
+      message: 'Error creating a new user',
+    });
+  }
+});
 
-        if(!delUser) {
-            res.status(404).json({
-                message: 'User not found'
-            });
-            return;
+// DELETE request - request user by user id
+// TODO: to add an option to delete account on user profile page
+router.delete('/delete/:id', async (req, res) => {
+try {
+    const delUser = await User.destroy({
+        where: {
+            id: req.params.id,
         }
+    })
 
-        res.status(200).json({
-            message: 'The user has been deleted',
-            rows_deleted: delUser
-        })
-    } catch(err) {
-        console.log(err);
-        res.status(500).json(err);
+    if(!delUser) {
+        res.status(404).json({
+            message: 'User not found'
+        });
+        return;
     }
-  })
+
+    res.status(200).json({
+        message: 'The user has been deleted',
+        rows_deleted: delUser
+    })
+} catch(err) {
+    console.log(err);
+    res.status(500).json(err);
+}
+})
 
 module.exports = router

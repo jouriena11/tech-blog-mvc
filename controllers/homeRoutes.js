@@ -91,25 +91,36 @@ router.get('/dashboard', withAuth, async (req, res) => {
     })
     
     // console.log('userBlogs => ', userBlogs);
-    res.render('dashboard', {userData: userData, userBlogs: userBlogs});
+    res.render('dashboard', {
+        loginStatus: req.session.logged_in, 
+        userData: userData, 
+        userBlogs: userBlogs});
 });
 
 // redirect to profile page when logged in
 // redirect to login page when logged out
-// TODO: needs withAuth?
+// TODO: to display user data in the field
+// TODO: bcrypt for new password
 router.get('/profile', withAuth, async (req, res) => {
+    try {
         const profile = await User.findByPk(req.session.user_id);
         
-        console.log('profile => ', profile)
+        console.log('profile => ', profile.data)
 
-        res.render('profile');
-
-        return;
+        res.render('profile', {
+            loginStatus: req.session.logged_in
+        });
+    } catch(err) {
+        console.error(err);
+        res.status(500).json(err);
     }
-);
+});
 
 router.get('/create-new-blog', withAuth, async(req, res) => {
-    res.render('blog-new', {userId: req.session.user_id})
+    res.render('blog-new', {
+        userId: req.session.user_id,
+        loginStatus: req.session.logged_in
+    })
 });
 
 // when logged in as a creator and clicking on a particular blog from the dashboard, redirect to update-or-delete form
@@ -127,6 +138,6 @@ router.get('/blog/:blogId', withAuth, async (req, res) => {
     } catch (err) {
       res.status(500).json(err);
     }
-  });
+});
 
 module.exports = router;
