@@ -106,7 +106,10 @@ router.get('/profile', withAuth, async (req, res) => {
             raw: true
         });
         console.log('profile => ', profile);
-        res.render('profile', {profile: profile});
+        res.render('profile', {
+            profile: profile,
+            loginStatus: req.session.logged_in
+        });
 
     } catch(err) {
         console.error(err);
