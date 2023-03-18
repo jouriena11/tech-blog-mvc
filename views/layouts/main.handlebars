@@ -35,15 +35,15 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="/dashboard">Dashboard</a>
                             </li>
-                            <li id="navbar-profile-menu" class="nav-item">
-                                <a class="nav-link" href="/profile">Profile</a>
+                            <li class="nav-item">
+                                <a id="navbar-profile-menu" class="nav-link" href="#">Profile</a>
                             </li>
-                            <li id="navbar-logout-menu" class="nav-item">
+                            <li class="nav-item">
                                 <a id="navbar-logout-menu" class="nav-link" href="#">Logout</a>
                             </li>
                             {{else}}
-                            <li id="navbar-login-menu" class="nav-item">
-                                <a class="nav-link" href="/login">Login</a>
+                            <li class="nav-item">
+                                <a id="navbar-login-menu" class="nav-link" href="/login">Login</a>
                             </li>
                             {{/if}}
 
@@ -69,11 +69,6 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 <!-- Render script for logged in users only -->
-
-<script>
-    const loginStatus = {{user.logged_in}};
-</script>
-<script src="/js/dashboard.js"></script>
 </body>
 {{#if loginStatus}}
 <script src="/js/logout.js"></script>

@@ -34,7 +34,7 @@ router.get('/', async (req, res) => {
 
         res.render('homepage', { 
             blogs: mappedBlogs,
-            logged_in: req.session.logged_in
+            loginStatus: req.session.logged_in
         })
 
     } catch(err) {
@@ -50,7 +50,7 @@ router.get('/login', (req, res) => {
         res.redirect('/dashboard');
         return;
     }
-    res.render('login');
+    res.render('login', {user: {logged_in: false}});
 });
 
 // redirect to homepage page when logged in
@@ -100,19 +100,16 @@ router.get('/dashboard', withAuth, async (req, res) => {
 // redirect to profile page when logged in
 // redirect to login page when logged out
 // TODO: to display user data in the field
-// TODO: bcrypt for new password
 router.get('/profile', withAuth, async (req, res) => {
-    try {
-        const profile = await User.findByPk(req.session.user_id);
-        
-        console.log('profile => ', profile.data)
-
-        res.render('profile', {
-            loginStatus: req.session.logged_in
+    try { // TODO: to receive req.session.user_id from dashboard.js
+        const profile = await User.findByPk(req.session.user_id, {
+            raw: true
         });
+        console.log('profile => ', profile);
+        res.render('profile', {profile: profile});
+
     } catch(err) {
         console.error(err);
-        res.status(500).json(err);
     }
 });
 
@@ -132,15 +129,28 @@ router.get('/blog-update-delete', withAuth, async(req, res) => {
 
 router.get('/blog/:blogId', withAuth, async (req, res) => {
     try {
-        const PORT = process.env.PORT || 3001;
         const blogId = req.params.blogId;
-        const { data: blogData } = await axios.get(`http://localhost:${PORT}/api/blog/${blogId}`);
-        console.log('frontend blogData => ', blogData)
-        res.render('blog-render', blogData);
+
+        const userBlog = await Blog.findByPk(blogId, {
+            include: [
+              {
+                model: User,
+                attributes: ['id', 'username']
+              }
+            ],
+            required: true, 
+            raw: true
+        }); // {}
+
+
+        if(Object.keys(userBlog).length > 0) {
+            userBlog.createdAt = dayjs(userBlog.created_date).format('DD-MM-YYYY HH:mm:ss');
+            userBlog.updatedAt = dayjs(userBlog.updated_date).format('DD-MM-YYYY HH:mm:ss');
+        }
+        res.render('blog-render', {userBlog: userBlog});
 
     } catch (err) {
         console.error(err);
-        res.status(500).json(err);
     }
 });
 

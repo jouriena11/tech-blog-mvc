@@ -47,7 +47,7 @@ router.post("/create-new", async (req, res) => {
   try {
     const newBlog = await Blog.create(req.body);
     console.log('newBlog =>', newBlog);
-    res.redirect('/dashboard') // TODO: the redirect is still isn't working
+    res.status(201).json(newBlog);
     
   } catch (err) {
     console.error(err);
@@ -59,7 +59,6 @@ router.post("/create-new", async (req, res) => {
 // api/blog/update/:id
 router.put("/update/:id", async (req, res) => {
   try {
-    console.log(req.body)
     const updatedBlog = await Blog.update(req.body, {
       where: {
         id: req.params.id,
@@ -76,6 +75,7 @@ router.put("/update/:id", async (req, res) => {
     res.status(200).json({
       message: "Your blog has been updated.",
     });
+
   } catch (err) {
     console.error(err);
     res.status(500).json(err);

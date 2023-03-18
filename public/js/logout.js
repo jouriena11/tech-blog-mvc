@@ -1,7 +1,5 @@
 const logoutLink = document.getElementById('navbar-logout-menu');
 
-logoutLink.classList.remove('d-none');
-
 logoutLink.addEventListener('click', logout)
 
 async function logout() {

@@ -2,6 +2,21 @@ const bcrypt = require('bcrypt');
 const router = require('express').Router();
 const { User } = require('../../models');
 
+// GET request - user profile by user_id
+// api/user/:id
+router.get('/:id', async (req, res) => {
+  const userProfile = await User.findByPk(req.params.id);
+
+  if(!userProfile) {
+    res.status(404).json({
+      message: 'Error finding user profile'
+    })
+  }
+
+  res.status(200).json(userProfile);
+
+})
+
 // POST request - login
 router.post('/login', async (req, res) => {
     try {
@@ -110,6 +125,35 @@ router.post('/signup', async (req, res) => {
   }
 });
 
+// PUT request - update user profile
+// api/user/update/:id
+router.put('/update/:id', async (req, res) => {
+  try {
+    const updatedUserData = await User.update(req.body, {
+      where: {
+        id: req.params.id
+      }
+    })
+
+    if (!updatedUserData) {
+      res.status(404).json({
+        message: 'User not found'
+      }); 
+      return;
+    };
+
+    res.status(200).json({
+      message: 'Your profile has been updated.'
+    })
+
+    // TODO: res.redirect('/dashboard'))
+
+  } catch(err) {
+    console.error(err);
+    res.status(500).json(err);
+  }
+})
+
 // DELETE request - request user by user id
 // TODO: to add an option to delete account on user profile page
 router.delete('/delete/:id', async (req, res) => {
@@ -136,5 +180,8 @@ try {
     res.status(500).json(err);
 }
 })
+
+
+
 
 module.exports = router
