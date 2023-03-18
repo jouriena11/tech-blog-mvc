@@ -99,9 +99,8 @@ router.get('/dashboard', withAuth, async (req, res) => {
 
 // redirect to profile page when logged in
 // redirect to login page when logged out
-// TODO: to display user data in the field
 router.get('/profile', withAuth, async (req, res) => {
-    try { // TODO: to receive req.session.user_id from dashboard.js
+    try {
         const profile = await User.findByPk(req.session.user_id, {
             raw: true
         });
@@ -124,7 +123,6 @@ router.get('/create-new-blog', withAuth, async(req, res) => {
 });
 
 // when logged in as a creator and clicking on a particular blog from the dashboard, redirect to update-or-delete form
-// TODO: if no change, then don't save?
 // TODO: when press delete, confirm()
 router.get('/blog-update-delete', withAuth, async(req, res) => {
     res.render('blog-update-delete')

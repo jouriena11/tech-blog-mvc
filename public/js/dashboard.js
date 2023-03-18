@@ -10,7 +10,7 @@ async function openBlog(event) {
     const blogId = event.target.dataset.blogId
     console.log('blogId => ', blogId);
     try {
-        window.location.href = `/blog/${blogId}` // http://localhost:3001/blog/1
+        window.location.href = `/blog/${blogId}`
     } catch(err) {
         console.log(err);
     }
@@ -21,6 +21,5 @@ async function openBlog(event) {
 profileMenu.addEventListener('click', clickProfile);
 
 function clickProfile() { 
-    // TODO: how to pass req.session.user_id as parameter?    
-    window.location.href = 'profile'; // http://localhost:3001/profile
+    window.location.href = 'profile';
 }

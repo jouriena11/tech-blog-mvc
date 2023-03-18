@@ -5,11 +5,6 @@ const emailField = document.getElementById('email-input-field');
 const updateProfileBtn = document.getElementById('profile-update-submit-btn');
 const deleteProfileBtn = document.getElementById('profile-delete-submit-btn');
 
-// TODO: dashboard.js >> to pass user_id to user-routes.js >> GET request /api/user/:id on page load >> when clicking on Profile menu
-// TODO: to display username, first_name, last_name, and email from response.data
-// TODO: to compile req.body and send it to PUT request
-// TODO: new password -- to hash
-
 updateProfileBtn.addEventListener('click', updateProfile)
 
 async function updateProfile() {
