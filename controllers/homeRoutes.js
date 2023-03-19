@@ -149,7 +149,7 @@ router.get('/blog/:blogId', withAuth, async (req, res) => {
             raw: true
         });
 
-        console.log('blogComments => ', blogComments)
+        // console.log('blogComments => ', blogComments)
 
         if(Object.keys(userBlog).length > 0) { // to apply dayjs formatting if userBlog object contains any property key
             userBlog.createdAt = dayjs(userBlog.created_date).format('DD-MM-YYYY HH:mm:ss');
@@ -160,6 +160,8 @@ router.get('/blog/:blogId', withAuth, async (req, res) => {
             obj.createdAt = dayjs(blogComments.createdAt).format('DD-MM-YYYY HH:mm:ss');
             obj.updatedAt = dayjs(blogComments.updatedAt).format('DD-MM-YYYY HH:mm:ss');
         })
+
+        console.log('userBlog => ', userBlog)
 
         res.render('blog-render', {
             userBlog: userBlog,

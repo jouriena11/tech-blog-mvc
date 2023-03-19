@@ -34,9 +34,9 @@
                         <h6 class="text-black">Add a comment</h6>
                     </div>
                     <div class="mb-3 ">
-                        <textarea id="blog-content-field" class="form-control rounded-0 rounded-bottom" rows="5" placeholder="Enter your comment here."></textarea>
+                        <textarea id="blog-comment-field" class="form-control rounded-0 rounded-bottom" rows="5" placeholder="Enter your comment here."></textarea>
                     </div>
-                    <button id="publish-blog-btn" type="submit" class="btn btn-primary mx-1 my-1">Publish</button>
+                    <button id="publish-comment-btn" type="submit" class="btn btn-primary mx-1 my-1" data-user-id="{{userBlog.userId}}" data-blog-id="{{userBlog.id}}">Publish</button>
                 </form>
             </div>
             {{/if}}
