@@ -1,0 +1,18 @@
+{{!-- update a blog --}}
+<div id="new-blog-form" class="row py-3" data-blog-id="blogId">
+    <form class="offset-1 col-10 offset-lg-3 col-lg-6">
+        <div class="text-white bg-dark px-3 py-2 rounded-1 mb-3">
+            <h2>Blog Update</h2>
+        </div>
+        <div class="mb-3 mx-1 py-1">
+            <label for="blog-title-field" class="form-label"><strong>Title</strong></label>
+            <textarea id="blog-title-field" type="text" class="form-control" aria-describedby="emailHelp" rows="1">{{{blogData.title}}}</textarea>
+        </div>
+        <div class="mb-3 mx-1">
+            <label for="blog-content-field" class="form-label"><strong>Content</strong></label>
+            <textarea id="blog-content-field" class="form-control" rows="10">{{{blogData.content}}}</textarea>
+        </div>
+        <button id="update-blog-btn" type="submit" class="btn btn-warning mx-1 my-1" data-blog-id="{{{blogData.id}}}">Update</button>
+    </form>
+</div>
+<script src="/js/blog-update.js"></script>

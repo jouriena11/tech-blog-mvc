@@ -5,9 +5,13 @@ editBlogBtn.addEventListener('click', editBlog);
 
 deleteBlogBtn.addEventListener('click', deleteBlog);
 
-async function editBlog() {
-    const editedBlog = await Blog.findByPk(req.params.id);
-
+async function editBlog(event) {
+    const blogId = event.target.dataset.blogId;
+    try {
+        window.location.href = `update/${blogId}`;
+    } catch(err) {
+        console.log(err);
+    }
 };
 
 async function deleteBlog(event) {

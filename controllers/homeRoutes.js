@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const axios = require('axios');
 const dayjs = require('dayjs');
 const { User, Blog } = require('../models');
 const withAuth = require('../utils/auth');
@@ -152,6 +151,27 @@ router.get('/blog/:blogId', withAuth, async (req, res) => {
     }
 });
 
+router.get('/blog/update/:blogId', withAuth, async (req, res) => {
+    try {
+        const blogId = req.params.blogId;
+
+        const currentBlogData = await Blog.findByPk(blogId, {
+            raw: true
+        });
+
+        // console.log('currentBlogData => ', currentBlogData)
+
+        res.render('blog-update', {
+            blogId: blogId,
+            blogData: currentBlogData,
+            loginStatus: req.session.logged_in
+        });
+
+    } catch(err) {
+        console.error(err);
+    }
+})
+
 router.get('/blog/delete/:blogId', withAuth, async (req, res) => {
     try {
         const blogId = req.params.blogId;
@@ -161,7 +181,7 @@ router.get('/blog/delete/:blogId', withAuth, async (req, res) => {
             }
         });
 
-        if(delBlog > 0) {
+        if(delBlog > 0) { // Blog.destroy(} returns the number of rows deleted, not an object
             console.log('The blog has been deleted.');
             res.redirect('/dashboard');
         };

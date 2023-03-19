@@ -16,7 +16,7 @@ async function createNewBlog() {
             user_id: userId
         };
 
-        console.log('newBlogdata => ', newBlogData);
+        // console.log('newBlogdata => ', newBlogData);
 
         const response = await axios.post('/api/blog/create-new', newBlogData);
         if(response.status === 201) {
