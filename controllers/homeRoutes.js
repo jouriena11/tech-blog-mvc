@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const dayjs = require('dayjs');
-const { User, Blog } = require('../models');
+const { User, Blog, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 const { limitCharacters } = require('../utils/helpers');
 
@@ -136,13 +136,34 @@ router.get('/blog/:blogId', withAuth, async (req, res) => {
             raw: true
         });
 
+        const blogComments = await Comment.findAll({
+            where: {
+                blog_id: blogId
+            },
+            include: [
+                {
+                    model: User,
+                    attributes: ['id', 'username']
+                }
+            ],
+            raw: true
+        });
+
+        console.log('blogComments => ', blogComments)
 
         if(Object.keys(userBlog).length > 0) { // to apply dayjs formatting if userBlog object contains any property key
             userBlog.createdAt = dayjs(userBlog.created_date).format('DD-MM-YYYY HH:mm:ss');
             userBlog.updatedAt = dayjs(userBlog.updated_date).format('DD-MM-YYYY HH:mm:ss');
         }
+
+        blogComments.forEach((obj) => {
+            obj.createdAt = dayjs(blogComments.createdAt).format('DD-MM-YYYY HH:mm:ss');
+            obj.updatedAt = dayjs(blogComments.updatedAt).format('DD-MM-YYYY HH:mm:ss');
+        })
+
         res.render('blog-render', {
             userBlog: userBlog,
+            blogComments: blogComments,
             loginStatus: req.session.logged_in
         });
 

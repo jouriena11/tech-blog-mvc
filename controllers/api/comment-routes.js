@@ -5,10 +5,10 @@ const { Comment, Blog } = require("../../models");
 // api/comment/:id
 router.get("/:id", async (req, res) => {
   try {
-    const blogComments = await Blog.findByPk(req.params.id, {
-      include: [
+    const blogComments = await Comment.findAll({
+      where: [
         {
-          model: Comment,
+          blog_id: req.params.id
         },
       ],
     });

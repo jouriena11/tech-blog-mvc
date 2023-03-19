@@ -1,6 +1,5 @@
 {{!-- if logged out, no comment box --}}
 {{!-- if logged in as audience, there's comment box --}}
-{{!-- update button, delete button --}}
 
     <div id="individual-blog-render" class="row mx-3">
         <div class="">
@@ -22,15 +21,13 @@
                     <h6 class="card-header">Comments</h6>
                 </div>
                 <!-- stacks of comments to be displayed here -->
-                {{!-- {{#each }} --}}
+                {{#each blogComments}}
                     <div class="card-body">
-                            <p class="card-text">"Comment.content" -- username, created_date</p>
+                            <p class="card-text">"{{comment_content}}" -- {{[user.username]}}, {{createdAt}}</p>
                     </div>
-                    <div class="card-body">
-                            <p class="card-text">"Comment.content" -- username, created_date</p>
-                    </div>
-                {{!-- {{/each}} --}}
+                {{/each}}
             </div>
+            {{#if loginStatus}}
             <div id="blog-comment-form" class="row py-3">
                 <form class="">
                     <div class="bg-info px-3 py-2 rounded-0 rounded-top">
@@ -42,6 +39,7 @@
                     <button id="publish-blog-btn" type="submit" class="btn btn-primary mx-1 my-1">Publish</button>
                 </form>
             </div>
+            {{/if}}
         </div>
     </div>
     <script src="/js/blog-single.js"></script>
