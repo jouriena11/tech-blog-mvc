@@ -122,12 +122,6 @@ router.get('/create-new-blog', withAuth, async(req, res) => {
     })
 });
 
-// when logged in as a creator and clicking on a particular blog from the dashboard, redirect to update-or-delete form
-// TODO: when press delete, confirm()
-router.get('/blog-update-delete', withAuth, async(req, res) => {
-    res.render('blog-update-delete')
-});
-
 router.get('/blog/:blogId', withAuth, async (req, res) => {
     try {
         const blogId = req.params.blogId;
@@ -141,18 +135,40 @@ router.get('/blog/:blogId', withAuth, async (req, res) => {
             ],
             required: true, 
             raw: true
-        }); // {}
+        });
 
 
-        if(Object.keys(userBlog).length > 0) {
+        if(Object.keys(userBlog).length > 0) { // to apply dayjs formatting if userBlog object contains any property key
             userBlog.createdAt = dayjs(userBlog.created_date).format('DD-MM-YYYY HH:mm:ss');
             userBlog.updatedAt = dayjs(userBlog.updated_date).format('DD-MM-YYYY HH:mm:ss');
         }
-        res.render('blog-render', {userBlog: userBlog});
+        res.render('blog-render', {
+            userBlog: userBlog,
+            loginStatus: req.session.logged_in
+        });
 
     } catch (err) {
         console.error(err);
     }
 });
+
+router.get('/blog/delete/:blogId', withAuth, async (req, res) => {
+    try {
+        const blogId = req.params.blogId;
+        const delBlog = await Blog.destroy({
+            where: {
+                id: blogId
+            }
+        });
+
+        if(delBlog > 0) {
+            console.log('The blog has been deleted.');
+            res.redirect('/dashboard');
+        };
+
+    } catch(err) {
+        console.error(err);
+    }
+})
 
 module.exports = router;
