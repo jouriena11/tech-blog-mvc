@@ -59,6 +59,8 @@ Logout
 
 ---
 ## **Future Development**
+- Bug Fix: to hide `edit` and `delete` button if a user is logged out AND not the creator of the blog
+- Bug Fix: to redirect to dashboard after submitting a blog update
 - to allow password update 
 - to include forgot password functionality
 - to include last_update on blog rendering on homepage
