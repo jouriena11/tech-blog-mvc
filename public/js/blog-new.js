@@ -1,10 +1,12 @@
 const blogTitleField = document.getElementById('blog-title-field');
 const blogContentField = document.getElementById('blog-content-field');
-const publishBlogBtn = document.getElementById('publish-blog-btn');
+//const publishBlogBtn = document.getElementById('publish-blog-btn');
+const blogNewForm = document.getElementById('blog-new-form');
 
-publishBlogBtn.addEventListener('click', createNewBlog);
+blogNewForm.addEventListener('submit', createNewBlog);
 
-async function createNewBlog() {
+async function createNewBlog(event) {
+    event.preventDefault();
     try {
         const blogTitle = blogTitleField.value.trim();
         const blogContent = blogContentField.value;
