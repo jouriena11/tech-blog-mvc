@@ -59,13 +59,9 @@ Logout
 
 ---
 ## **Future Development**
-- To fix bug: to render individual blog
-- To make it possible for logged-in users to delete a blog of their own creations
-- To make it possible for logged-in users to add comment to a blog
 - to allow password update 
 - to include forgot password functionality
 - to include last_update on blog rendering on homepage
-- when clicking on a username on homepage, the user would be redirected to another view that displays only blogs created by that particular user
-- to add text-decoration functionality to blog content creation
+- to add text-decoration functionality to blog content creation (e.g. bold text, highlights, etc.)
 - sorting blogs by chronological order
 - comment upvote to determine sort order
