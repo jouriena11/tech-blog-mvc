@@ -50,6 +50,8 @@ async function editBlog(event) {
 
 async function deleteBlog(event) {
     const blogId = event.target.dataset.blogId;
+
+    console.log('blogId => ', blogId)
     if(confirm('Are you sure you want to delete this blog?')) {
         try{
             const response = await axios.delete(`/api/blog/delete/${blogId}`);

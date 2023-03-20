@@ -162,12 +162,13 @@ router.get('/blog/:blogId', async (req, res) => {
         console.log('userBlog => ', userBlog)
         console.log('blogComments => ', blogComments)
         console.log('req.session.user_id => ', req.session.user_id)
+        console.log('userBlog.id => ', userBlog.id)
 
         res.render('blog-render', {
             userBlog: userBlog,
             blogComments: blogComments,
             userId: req.session.user_id,
-            loginStatus: req.session.logged_in
+            loginStatus: req.session.logged_in,
         });
 
     } catch (err) {

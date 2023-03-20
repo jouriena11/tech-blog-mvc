@@ -1,5 +1,4 @@
 const updateBlogBtn = document.getElementById('update-blog-btn');
-
 updateBlogBtn.addEventListener('click', editBlog);
 
 async function editBlog(event) {
@@ -8,6 +7,8 @@ async function editBlog(event) {
         const blogContent = document.getElementById('blog-content-field').value;
         const blogId = event.target.dataset.blogId;
     
+        console.log('blogId => ', blogId)
+
         const updateBlogData = {
             title: blogTitle,
             content: blogContent
