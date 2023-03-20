@@ -50,8 +50,15 @@ async function deleteBlog(event) {
     const blogId = event.target.dataset.blogId;
     if(confirm('Are you sure you want to delete this blog?')) {
         try{
-            window.location.href = `delete/${blogId}`;
+            const response = await axios.delete(`/api/blog/delete/${blogId}`);
+
+            if(response.status === 200) {
+                alert('Your blog has been deleted.');
+                window.location.href = '/dashboard';
+            }
+            
         } catch(err) {
+            alert('Error deleting a blog.')
             console.log(err);
         }
     }

@@ -121,7 +121,7 @@ router.get('/create-new-blog', withAuth, async(req, res) => {
     })
 });
 
-router.get('/blog/:blogId', withAuth, async (req, res) => {
+router.get('/blog/:blogId', async (req, res) => {
     try {
         const blogId = req.params.blogId;
 
@@ -189,25 +189,6 @@ router.get('/blog/update/:blogId', withAuth, async (req, res) => {
             blogData: currentBlogData,
             loginStatus: req.session.logged_in
         });
-
-    } catch(err) {
-        console.error(err);
-    }
-})
-
-router.get('/blog/delete/:blogId', withAuth, async (req, res) => {
-    try {
-        const blogId = req.params.blogId;
-        const delBlog = await Blog.destroy({
-            where: {
-                id: blogId
-            }
-        });
-
-        if(delBlog > 0) { // Blog.destroy(} returns the number of rows deleted, not an object
-            console.log('The blog has been deleted.');
-            res.redirect('/dashboard');
-        };
 
     } catch(err) {
         console.error(err);

@@ -91,6 +91,7 @@ router.delete("/delete/:id", async (req, res) => {
         id: req.params.id,
       },
     });
+    //console.log(req.params.id);
 
     if (!delBlog) {
       res.status(404).json({

@@ -34,4 +34,7 @@ async function signup(event) {
     }
 }
 
+
+// TODO: change addEventLister('click') to ('submit') + move element id to Form
+// reference: blog-new.js
 signupSubmitBtn.addEventListener('click', signup);

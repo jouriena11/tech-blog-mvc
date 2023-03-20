@@ -1,6 +1,6 @@
 const blogTitleField = document.getElementById('blog-title-field');
 const blogContentField = document.getElementById('blog-content-field');
-//const publishBlogBtn = document.getElementById('publish-blog-btn');
+
 const blogNewForm = document.getElementById('blog-new-form');
 
 blogNewForm.addEventListener('submit', createNewBlog);
@@ -21,10 +21,11 @@ async function createNewBlog(event) {
         // console.log('newBlogdata => ', newBlogData);
 
         const response = await axios.post('/api/blog/create-new', newBlogData);
-        console.log(response)
+        
         if(response.status === 201) {
             window.location.href = 'dashboard';
         }
+
     } catch(err) {
         alert('Failed to create a new blog.')
         console.log('error => ', err);
