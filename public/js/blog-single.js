@@ -14,7 +14,9 @@ async function publishComment(event) {
     event.preventDefault();
 
     const blogId = event.target.dataset.blogId;
-    const userId = event.target.dataset.userId;
+    const userId = event.target.dataset.userId
+
+    console.log('userId => ', userId)
     
     try {
     const blogComment = {

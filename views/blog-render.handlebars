@@ -2,10 +2,14 @@
 {{!-- if logged in as audience, there's comment box --}}
 
     <div id="individual-blog-render" class="row mx-3">
-        <div class="">
-            <button id="edit-blog-btn" type="submit" class="btn btn-warning mx-1 my-1" data-blog-id="{{{userBlog.id}}}">Edit</button>
-            <button id="delete-blog-btn" type="submit" class="btn btn-danger mx-1 my-1" data-blog-id="{{{userBlog.id}}}">Delete</button>
-        </div>
+        {{#if loginStatus}}
+            {{#ifEq userBlog.user_id userId }}
+            <div class="">
+                <button id="edit-blog-btn" type="submit" class="btn btn-warning mx-1 my-1" data-blog-id="{{{userBlog.id}}}">Edit</button>
+                <button id="delete-blog-btn" type="submit" class="btn btn-danger mx-1 my-1" data-blog-id="{{{userBlog.id}}}">Delete</button>
+            </div>
+            {{/ifEq}}
+        {{/if}}
         <div class="col-12 my-3">
             <div class="card">
                 <div class="bg-dark text-white rounded-top d-flex justify-content-between align-items-center py-3">
@@ -23,7 +27,13 @@
                 <!-- stacks of comments to be displayed here -->
                 {{#each blogComments}}
                     <div class="card-body">
-                            <p class="card-text">"{{comment_content}}" -- {{[user.username]}}, {{createdAt}}</p>
+                        <p class="card-text">"{{comment_content}}" -- 
+                            {{#ifEq ../userBlog.user_id user_id }}
+                                Author,
+                            {{/ifEq}}
+                            {{[user.username]}}
+                            {{createdAt}} 
+                        </p>
                     </div>
                 {{/each}}
             </div>
@@ -36,8 +46,13 @@
                     <div class="mb-3 ">
                         <textarea id="blog-comment-field" class="form-control rounded-0 rounded-bottom" rows="5" placeholder="Enter your comment here."></textarea>
                     </div>
-                    <button id="publish-comment-btn" type="submit" class="btn btn-primary mx-1 my-1" data-user-id="{{userBlog.userId}}" data-blog-id="{{userBlog.id}}">Publish</button>
+                    <button id="publish-comment-btn" type="submit" class="btn btn-primary mx-1 my-1" data-user-id="{{userId}}" data-blog-id="{{userBlog.id}}">Publish</button>
                 </form>
+            </div>
+            {{else}}
+            <div class="d-flex">
+                <a  href="/login"><button class="btn btn-primary mx-1">Login</button></a>
+                <p class="ms-2 my-auto">Please login to comment.</p>
             </div>
             {{/if}}
         </div>

@@ -146,8 +146,6 @@ router.put('/update/:id', async (req, res) => {
       message: 'Your profile has been updated.'
     })
 
-    // TODO: res.redirect('/dashboard'))
-
   } catch(err) {
     console.error(err);
     res.status(500).json(err);
@@ -155,7 +153,6 @@ router.put('/update/:id', async (req, res) => {
 })
 
 // DELETE request - request user by user id
-// TODO: to add an option to delete account on user profile page
 router.delete('/delete/:id', async (req, res) => {
 try {
     const delUser = await User.destroy({
@@ -180,8 +177,5 @@ try {
     res.status(500).json(err);
 }
 })
-
-
-
 
 module.exports = router
