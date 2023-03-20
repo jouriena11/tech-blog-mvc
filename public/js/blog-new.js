@@ -19,6 +19,7 @@ async function createNewBlog() {
         // console.log('newBlogdata => ', newBlogData);
 
         const response = await axios.post('/api/blog/create-new', newBlogData);
+        console.log(response)
         if(response.status === 201) {
             window.location.href = 'dashboard';
         }
