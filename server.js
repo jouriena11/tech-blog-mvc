@@ -15,8 +15,8 @@ const hbs = exphbs.create({ helpers });
 
 const sess = {
   // TODO: secret_session in .env is not passed to server.js
-  // secret: process.env.SESSION_SECRET,
-  secret: "sCrTv267**",
+  secret: process.env.SESSION_SECRET,
+  // secret: "sCrTv267**",
   cookie: {
     maxAge: 300000*5, // 15 min
     httpOnly: true, // cookie can only be accessed by the server and is not accessible by client-side scripts running in the browser. This helps to prevent cross-site scripting (XSS) attacks.
