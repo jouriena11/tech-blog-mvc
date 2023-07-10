@@ -13,6 +13,8 @@ services:
     command: >
       /bin/sh -c "npm install
       && npm start"
+    depends_on:
+      - tech-blog-mvc-mysql
     
   tech-blog-mvc-mysql:
     container_name: tech-blog-mvc-mysql
