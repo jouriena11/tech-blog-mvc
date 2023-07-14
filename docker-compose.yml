@@ -34,6 +34,9 @@ services:
     restart: always
     ports:
       - 8080:80
+    environment:
+      - PMA_HOST=172.31.20.8
+      - PMA_PORT=3306
 
 volumes:
   tech-blog-mvc-mysql:
