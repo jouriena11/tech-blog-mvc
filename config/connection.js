@@ -8,7 +8,7 @@ const sequelize = process.env.JAWSDB_URL
       process.env.DB_USER,
       process.env.DB_PASSWORD,
   {
-    host: '3.25.181.87',
+    host: '172.31.20.8',
     dialect: 'mysql',
     port: 3306,
     dialectOptions: {
