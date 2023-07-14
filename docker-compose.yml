@@ -37,6 +37,7 @@ services:
     environment:
       - PMA_HOST=172.31.20.8
       - PMA_PORT=3306
+      - PMA_ARBITRARY=1
 
 volumes:
   tech-blog-mvc-mysql:
