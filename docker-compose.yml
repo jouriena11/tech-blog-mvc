@@ -27,6 +27,13 @@ services:
       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
     ports: 
       - 3306:3306
+    
+  tech-blog-mvc-db-admin:
+    container_name: tech-blog-mvc-db-admin
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
 
 volumes:
   tech-blog-mvc-mysql:
