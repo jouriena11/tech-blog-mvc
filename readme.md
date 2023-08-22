@@ -5,7 +5,7 @@ The Tech Blog is a CMS website designed for blogging. By signing up and logging 
 
 ---
 ## **URLs**
-- [Deployed Application](https://tech-blog-999.herokuapp.com/)
+- [Deployed Application](http://13.211.203.123:4002/)
 - [GitHub Repository URL](https://github.com/jouriena11/tech-blog-mvc)
 
 ---
